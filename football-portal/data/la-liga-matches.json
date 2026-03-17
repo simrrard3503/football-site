@@ -1,0 +1,18 @@
+[
+  {
+    "id": 101,
+    "homeTeam": "Real Madrid",
+    "awayTeam": "Barcelona",
+    "status": "SCHEDULED",
+    "utcDate": "2026-03-20T19:00:00Z",
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 102,
+    "homeTeam": "Atletico Madrid",
+    "awayTeam": "Sevilla",
+    "status": "FINISHED",
+    "utcDate": "2026-03-14T17:30:00Z",
+    "score": { "home": 2, "away": 0 }
+  }
+]

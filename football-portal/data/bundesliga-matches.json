@@ -1,0 +1,18 @@
+[
+  {
+    "id": 301,
+    "homeTeam": "Bayern Munich",
+    "awayTeam": "Dortmund",
+    "status": "SCHEDULED",
+    "utcDate": "2026-03-21T17:30:00Z",
+    "score": { "home": null, "away": null }
+  },
+  {
+    "id": 302,
+    "homeTeam": "Leverkusen",
+    "awayTeam": "RB Leipzig",
+    "status": "FINISHED",
+    "utcDate": "2026-03-15T14:30:00Z",
+    "score": { "home": 2, "away": 2 }
+  }
+]

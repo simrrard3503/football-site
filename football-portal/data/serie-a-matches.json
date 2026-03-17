@@ -1,0 +1,18 @@
+[
+  {
+    "id": 201,
+    "homeTeam": "Inter",
+    "awayTeam": "Juventus",
+    "status": "LIVE",
+    "utcDate": "2026-03-17T19:45:00Z",
+    "score": { "home": 1, "away": 1 }
+  },
+  {
+    "id": 202,
+    "homeTeam": "Milan",
+    "awayTeam": "Roma",
+    "status": "FINISHED",
+    "utcDate": "2026-03-13T19:45:00Z",
+    "score": { "home": 3, "away": 1 }
+  }
+]

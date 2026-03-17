@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "homeTeam": "Liverpool",
+    "awayTeam": "Arsenal",
+    "status": "FINISHED",
+    "utcDate": "2026-03-15T16:30:00Z",
+    "score": {
+      "home": 2,
+      "away": 1
+    }
+  },
+  {
+    "id": 2,
+    "homeTeam": "Manchester City",
+    "awayTeam": "Chelsea",
+    "status": "SCHEDULED",
+    "utcDate": "2026-03-18T19:45:00Z",
+    "score": {
+      "home": null,
+      "away": null
+    }
+  },
+  {
+    "id": 3,
+    "homeTeam": "Tottenham",
+    "awayTeam": "Newcastle United",
+    "status": "FINISHED",
+    "utcDate": "2026-03-14T14:00:00Z",
+    "score": {
+      "home": 1,
+      "away": 1
+    }
+  },
+  {
+    "id": 4,
+    "homeTeam": "Aston Villa",
+    "awayTeam": "Manchester United",
+    "status": "LIVE",
+    "utcDate": "2026-03-17T20:00:00Z",
+    "score": {
+      "home": 1,
+      "away": 0
+    }
+  },
+  {
+    "id": 5,
+    "homeTeam": "Brighton",
+    "awayTeam": "West Ham",
+    "status": "FINISHED",
+    "utcDate": "2026-03-13T19:30:00Z",
+    "score": {
+      "home": 3,
+      "away": 2
+    }
+  }
+]
