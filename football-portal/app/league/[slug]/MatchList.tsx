@@ -21,7 +21,7 @@ type Props = {
   matches: Match[];
 };
 
-type SortOption = "latest" | "oldest" | "homeTeam";
+type SortOption = "latest" | "oldest" | "homeTeam" | "awayTeam";
 
 export default function MatchList({ slug, matches }: Props) {
   const [search, setSearch] = useState("");
@@ -57,6 +57,10 @@ export default function MatchList({ slug, matches }: Props) {
       sortedMatches.sort((a, b) => a.homeTeam.localeCompare(b.homeTeam));
     }
 
+    if (sortBy === "awayTeam") {
+      sortedMatches.sort((a, b) => a.awayTeam.localeCompare(b.awayTeam));
+    }
+
     return sortedMatches;
   }, [matches, search, sortBy]);
 
@@ -65,6 +69,7 @@ export default function MatchList({ slug, matches }: Props) {
       <div
         style={{
           display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
           gap: "12px",
           marginBottom: "20px",
         }}
@@ -101,6 +106,7 @@ export default function MatchList({ slug, matches }: Props) {
           <option value="latest">최신 경기순</option>
           <option value="oldest">오래된 경기순</option>
           <option value="homeTeam">홈팀 이름순</option>
+          <option value="awayTeam">원정팀 이름순</option>
         </select>
       </div>
 
@@ -134,6 +140,7 @@ export default function MatchList({ slug, matches }: Props) {
                   padding: "20px",
                   background: "#ffffff",
                   boxShadow: "0 4px 14px rgba(0,0,0,0.06)",
+                  transition: "transform 0.15s ease, box-shadow 0.15s ease",
                 }}
               >
                 <div
@@ -142,18 +149,18 @@ export default function MatchList({ slug, matches }: Props) {
                     justifyContent: "space-between",
                     alignItems: "center",
                     gap: "12px",
-                    marginBottom: "10px",
+                    marginBottom: "14px",
                     flexWrap: "wrap",
                   }}
                 >
                   <div
                     style={{
-                      fontSize: "22px",
-                      fontWeight: 800,
-                      color: "#111827",
+                      color: "#6b7280",
+                      fontSize: "14px",
+                      fontWeight: 600,
                     }}
                   >
-                    {match.homeTeam} vs {match.awayTeam}
+                    {new Date(match.utcDate).toLocaleString("ko-KR")}
                   </div>
 
                   <div
@@ -172,22 +179,55 @@ export default function MatchList({ slug, matches }: Props) {
 
                 <div
                   style={{
-                    color: "#6b7280",
-                    marginBottom: "8px",
-                    fontSize: "15px",
+                    display: "grid",
+                    gridTemplateColumns: "1fr auto 1fr",
+                    alignItems: "center",
+                    gap: "12px",
                   }}
                 >
-                  날짜: {new Date(match.utcDate).toLocaleString("ko-KR")}
+                  <div
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: 800,
+                      color: "#111827",
+                    }}
+                  >
+                    {match.homeTeam}
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: "24px",
+                      fontWeight: 800,
+                      color: "#111827",
+                      minWidth: "72px",
+                      textAlign: "center",
+                    }}
+                  >
+                    {match.score.home ?? "-"} : {match.score.away ?? "-"}
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: 800,
+                      color: "#111827",
+                      textAlign: "right",
+                    }}
+                  >
+                    {match.awayTeam}
+                  </div>
                 </div>
 
                 <div
                   style={{
-                    fontSize: "18px",
-                    fontWeight: 700,
-                    color: "#111827",
+                    marginTop: "14px",
+                    color: "#6b7280",
+                    fontSize: "14px",
+                    fontWeight: 600,
                   }}
                 >
-                  스코어: {match.score.home ?? "-"} : {match.score.away ?? "-"}
+                  경기 상세 보기 →
                 </div>
               </div>
             </Link>
@@ -201,9 +241,12 @@ export default function MatchList({ slug, matches }: Props) {
               border: "1px solid #e5e7eb",
               color: "#6b7280",
               fontWeight: 600,
+              lineHeight: 1.6,
             }}
           >
-            검색 결과가 없습니다.
+            조건에 맞는 경기가 없습니다.
+            <br />
+            다른 팀명이나 정렬 조건을 시도해보세요.
           </div>
         )}
       </div>
