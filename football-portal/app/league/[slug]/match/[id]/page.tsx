@@ -27,7 +27,10 @@ export default async function MatchDetailPage({ params }: PageProps) {
           <h1 style={{ fontSize: "32px", fontWeight: 800, marginBottom: "12px" }}>
             리그를 찾을 수 없습니다
           </h1>
-          <Link href="/" style={{ color: "#2563eb", textDecoration: "none", fontWeight: 700 }}>
+          <Link
+            href="/"
+            style={{ color: "#2563eb", textDecoration: "none", fontWeight: 700 }}
+          >
             홈으로 돌아가기
           </Link>
         </div>
@@ -37,6 +40,12 @@ export default async function MatchDetailPage({ params }: PageProps) {
 
   const matchId = Number(id);
   const match = league.matches.find((item) => item.id === matchId);
+  const currentIndex = league.matches.findIndex((item) => item.id === matchId);
+const prevMatch = currentIndex > 0 ? league.matches[currentIndex - 1] : null;
+const nextMatch =
+  currentIndex < league.matches.length - 1
+    ? league.matches[currentIndex + 1]
+    : null;
 
   if (!match) {
     return (
@@ -73,6 +82,15 @@ export default async function MatchDetailPage({ params }: PageProps) {
       </main>
     );
   }
+
+  const resultLabel =
+    match.score.home === null || match.score.away === null
+      ? "결과 미정"
+      : match.score.home > match.score.away
+      ? `${match.homeTeam} 승`
+      : match.score.home < match.score.away
+      ? `${match.awayTeam} 승`
+      : "무승부";
 
   return (
     <main
@@ -254,11 +272,199 @@ export default async function MatchDetailPage({ params }: PageProps) {
 
           <div
             style={{
+              marginBottom: "28px",
+              padding: "18px 20px",
+              borderRadius: "18px",
+              backgroundColor: "#eef2ff",
+              border: "1px solid #c7d2fe",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "13px",
+                color: "#6b7280",
+                fontWeight: 700,
+                marginBottom: "8px",
+              }}
+            >
+              경기 결과 요약
+            </div>
+
+            <div
+              style={{
+                fontSize: "24px",
+                fontWeight: 800,
+                color: "#111827",
+              }}
+            >
+              {resultLabel}
+            </div>
+          </div>
+
+          <div
+            style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
               gap: "16px",
             }}
-          >
+            >
+<div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    gap: "16px",
+    flexWrap: "wrap",
+    marginTop: "28px",
+  }}
+>
+  {prevMatch ? (
+    <Link
+      href={`/league/${slug}/match/${prevMatch.id}`}
+      style={{
+        flex: "1 1 260px",
+        textDecoration: "none",
+        backgroundColor: "#ffffff",
+        border: "1px solid #e5e7eb",
+        borderRadius: "18px",
+        padding: "18px 20px",
+        color: "#111827",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "13px",
+          color: "#6b7280",
+          fontWeight: 700,
+          marginBottom: "8px",
+        }}
+      >
+        ← 이전 경기
+      </div>
+      <div
+        style={{
+          fontSize: "18px",
+          fontWeight: 800,
+          marginBottom: "6px",
+        }}
+      >
+        {prevMatch.homeTeam} vs {prevMatch.awayTeam}
+      </div>
+      <div
+        style={{
+          fontSize: "14px",
+          color: "#6b7280",
+          fontWeight: 600,
+        }}
+      >
+        {new Date(prevMatch.utcDate).toLocaleString("ko-KR")}
+      </div>
+    </Link>
+  ) : (
+    <div
+      style={{
+        flex: "1 1 260px",
+        border: "1px solid #e5e7eb",
+        borderRadius: "18px",
+        padding: "18px 20px",
+        backgroundColor: "#f9fafb",
+        color: "#9ca3af",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "13px",
+          fontWeight: 700,
+          marginBottom: "8px",
+        }}
+      >
+        ← 이전 경기
+      </div>
+      <div
+        style={{
+          fontSize: "16px",
+          fontWeight: 700,
+        }}
+      >
+        이전 경기가 없습니다
+      </div>
+    </div>
+  )}
+
+  {nextMatch ? (
+    <Link
+      href={`/league/${slug}/match/${nextMatch.id}`}
+      style={{
+        flex: "1 1 260px",
+        textDecoration: "none",
+        backgroundColor: "#ffffff",
+        border: "1px solid #e5e7eb",
+        borderRadius: "18px",
+        padding: "18px 20px",
+        color: "#111827",
+        textAlign: "right",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "13px",
+          color: "#6b7280",
+          fontWeight: 700,
+          marginBottom: "8px",
+        }}
+      >
+        다음 경기 →
+      </div>
+      <div
+        style={{
+          fontSize: "18px",
+          fontWeight: 800,
+          marginBottom: "6px",
+        }}
+      >
+        {nextMatch.homeTeam} vs {nextMatch.awayTeam}
+      </div>
+      <div
+        style={{
+          fontSize: "14px",
+          color: "#6b7280",
+          fontWeight: 600,
+        }}
+      >
+        {new Date(nextMatch.utcDate).toLocaleString("ko-KR")}
+      </div>
+    </Link>
+  ) : (
+    <div
+      style={{
+        flex: "1 1 260px",
+        border: "1px solid #e5e7eb",
+        borderRadius: "18px",
+        padding: "18px 20px",
+        backgroundColor: "#f9fafb",
+        color: "#9ca3af",
+        textAlign: "right",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "13px",
+          fontWeight: 700,
+          marginBottom: "8px",
+        }}
+      >
+        다음 경기 →
+      </div>
+      <div
+        style={{
+          fontSize: "16px",
+          fontWeight: 700,
+        }}
+      >
+        다음 경기가 없습니다
+      </div>
+    </div>
+  )}
+</div>            
             <div
               style={{
                 backgroundColor: "#ffffff",
